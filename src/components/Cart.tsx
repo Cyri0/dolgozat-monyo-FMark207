@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import type { BeerType } from "./BeerCard"
-
+import { CartContext } from "../context/CartContextProvider"
 export type CartItemType = {
     item: BeerType,
     quantity: number
 }
 
-const Cart = (props: { cart: CartItemType[]}) => {
+const Cart = () => {
   const [sum, setSum] = useState(0)
+  const { cart } = useContext(CartContext)
 
   useEffect(()=>{
     let currSum = 0
-    props.cart.forEach(beer => currSum += beer.item.price)
+    cart.forEach(beer => currSum += beer.item.price)
     setSum(currSum)
-  }, [props])
+  }, [cart])
 
   return (
     <div>
-        {props.cart.length} item in Cart for {sum} Ft!
-
+        {cart.length} item in Cart for {sum} Ft!
         <ul>
-            {props.cart.map(beer => <li>{beer.item.name}</li>)}
+            {cart.map(beer => <li>{beer.item.name}</li>)}
         </ul>
     </div>
   )

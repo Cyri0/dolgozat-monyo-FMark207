@@ -1,3 +1,6 @@
+import { useContext } from "react"
+import { CartContext } from "../context/CartContextProvider"
+
 export type BeerType = {
     image:string,
     name: string,
@@ -7,8 +10,8 @@ export type BeerType = {
     available: boolean
 }
 
-const BeerCard = (props:{beer: BeerType, addToCart: (b: BeerType)=>void}) => {
-
+const BeerCard = (props:{beer: BeerType}) => {
+  const { addToCart } = useContext(CartContext)
   return (
     <div className='beerCard'>
 
@@ -18,7 +21,7 @@ const BeerCard = (props:{beer: BeerType, addToCart: (b: BeerType)=>void}) => {
       <strong className={props.beer.available ? "available" : "notAvailable"}>{props.beer.available ? "Raktáron" : "Nincs Raktáron"}</strong>
 
       <button 
-        onClick={()=>props.addToCart(props.beer)}
+        onClick={()=>addToCart(props.beer)}
         disabled={!props.beer.available}
       >Kosárba!</button>
     </div>
