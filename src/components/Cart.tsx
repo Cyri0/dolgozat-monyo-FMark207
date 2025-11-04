@@ -12,7 +12,7 @@ const Cart = () => {
 
   useEffect(()=>{
     let currSum = 0
-    cart.forEach(beer => currSum += beer.item.price)
+    cart.forEach(beer => currSum += beer.item.price * beer.quantity)
     setSum(currSum)
   }, [cart])
 
@@ -20,7 +20,7 @@ const Cart = () => {
     <div>
         {cart.length} item in Cart for {sum} Ft!
         <ul>
-            {cart.map(beer => <li>{beer.item.name}</li>)}
+            {cart.map(beer => <li>{beer.item.name} - {beer.quantity}</li>)}
         </ul>
     </div>
   )

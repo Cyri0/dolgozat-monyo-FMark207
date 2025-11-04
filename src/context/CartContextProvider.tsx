@@ -18,7 +18,11 @@ const CartContextProvider = (props: { children: React.ReactNode }) => {
 
         if (!includes) {
             setCart(prev => [...prev, { item: beer, quantity: 1 }])
-            // TODO szünet után
+        }else{
+            setCart(prev => prev.map(cartItem => 
+                cartItem.item.name === beer.name ? 
+                {...cartItem, quantity: cartItem.quantity + 1} : 
+                cartItem ))
         }
     }
 
